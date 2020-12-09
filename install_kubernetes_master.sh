@@ -51,16 +51,19 @@ function set_config() {
 }
 
 function call_on_finished() { 
+    
+    echo "删除master-node上的污点配置"
+    sleep 5s
+    kubectl taint nodes master node-role.kubernetes.io/master:NoSchedule-
+    
+    kubectl create namespace demo
+    kubectl apply -f ./pods/demo.yaml
+
     echo "查看所有namespace下的Pod"
     kubectl get pods --all-namespaces
 
     echo "😈😈😈😈😈😈😈😈😈😈😈😈😈"
     print_plugin
-
-    echo "删除master-node上的污点配置"
-    sleep 5s
-    kubectl taint nodes master node-role.kubernetes.io/master:NoSchedule-
-
 }
 
 function call_all() {
