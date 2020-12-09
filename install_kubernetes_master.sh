@@ -64,8 +64,11 @@ function call_on_finished() {
     print_plugin
 
     echo "查看所有namespace下的Pod"
-    watch -n 1 kubectl get pods --all-namespaces
-
+    for variable  in {1..300}
+	do
+    	kubectl get pods --all-namespaces
+		sleep 1s
+	done
     echo "😈😈😈😈😈😈😈😈😈😈😈😈😈😈😈"
 }
 
@@ -88,8 +91,8 @@ function call_all() {
 if [ $# -gt 0 ] 
 then
 	for arg in $*; do
-	    $arg
+	    $arg | tee ./${arg}.log
 	done
 else     
-	call_all
+	call_all | tee ./install_kubernetes_master.log
 fi
