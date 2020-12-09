@@ -36,6 +36,9 @@ function install_master() {
         kubeadm init --config=kubeadm.config.yaml --ignore-preflight-errors=all
     fi
 
+    echo "删除master-node上的污点配置"
+    kubectl taint nodes master node-role.kubernetes.io/master:NoSchedule-
+
     echo "😈😈😈😈😈😈😈😈😈😈😈😈😈😈😈😈😈😈😈😈😈"
 }
 
