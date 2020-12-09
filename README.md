@@ -19,5 +19,5 @@ Kubernetes  + Docker 自动安装脚本
 
 直接在命令行中执行
 ```
-sh -c "$(curl -fsSL https://gitee.com/wangmingco/kubernetes-install/raw/main/install_kubernetes_master.sh)" 2>&1 | tee  ./install_kubernetes_master.log
+sh -c "$(curl -fsSL https://gitee.com/wangmingco/kubernetes-install/raw/master/install_kubernetes_master.sh)" 2>&1 | tee  ./install_kubernetes_master.log
 ```
