@@ -36,9 +36,6 @@ function install_master() {
         kubeadm init --config=kubeadm.config.yaml --ignore-preflight-errors=all
     fi
 
-    echo "删除master-node上的污点配置"
-    kubectl taint nodes master node-role.kubernetes.io/master:NoSchedule-
-
     echo "😈😈😈😈😈😈😈😈😈😈😈😈😈😈😈😈😈😈😈😈😈"
 }
 
@@ -53,12 +50,17 @@ function set_config() {
     echo "😈😈😈😈😈😈😈😈😈😈😈😈😈😈😈😈😈😈"
 }
 
-function print_on_finished() { 
+function call_on_finished() { 
     echo "查看所有namespace下的Pod"
     kubectl get pods --all-namespaces
 
     echo "😈😈😈😈😈😈😈😈😈😈😈😈😈"
     print_plugin
+
+    echo "删除master-node上的污点配置"
+    sleep 5s
+    kubectl taint nodes master node-role.kubernetes.io/master:NoSchedule-
+
 }
 
 function call_all() {
@@ -74,7 +76,7 @@ function call_all() {
 
     source ./install_plugins.sh
 
-    print_on_finished
+    call_on_finished
 }
 
 if [ $# -gt 0 ] 
