@@ -68,7 +68,8 @@ function call_on_finished() {
 
     echo "查看所有namespace下的Pod"
     for variable  in {1..300}
-	do
+	do 
+        clear
     	kubectl get pods --all-namespaces
 		sleep 1s
 	done
