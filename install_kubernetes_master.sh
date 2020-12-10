@@ -37,7 +37,7 @@ function install_master() {
     fi
 
 	echo "测试镜像拉取"
-	kubeadm config images pull --config=kubeadm.default.yaml
+	kubeadm config images pull --config=kubeadm.config.yaml
 
     echo "😈😈😈😈😈😈😈😈😈😈😈😈😈😈😈😈😈😈😈😈😈"
 }
