@@ -3,9 +3,8 @@
 function clone_repo() {
     echo "😈😈😈 开始下载仓库 😈😈😈"
 	command -v git >/dev/null 2>&1 || { yum install -y git; }
-	
-    rm -rf $HOME/kubernetes-install 
 
+    rm -rf $HOME/kubernetes-install/
 	git clone https://gitee.com/wangmingco/kubernetes-install.git ~/kubernetes-install/
 
     echo "😈😈😈😈😈😈😈😈😈😈😈😈😈😈"
@@ -64,8 +63,11 @@ function call_on_finished() {
     print_plugin
 
     echo "查看所有namespace下的Pod"
-    watch -n 1 kubectl get pods --all-namespaces
-
+    for variable  in {1..300}
+	do
+    	kubectl get pods --all-namespaces
+		sleep 1s
+	done
     echo "😈😈😈😈😈😈😈😈😈😈😈😈😈😈😈"
 }
 
@@ -88,8 +90,8 @@ function call_all() {
 if [ $# -gt 0 ] 
 then
 	for arg in $*; do
-	    $arg
+	    $arg | tee $HOME/${arg}.log
 	done
 else     
-	call_all
+	call_all | tee $HOME/install_kubernetes_master.log
 fi
