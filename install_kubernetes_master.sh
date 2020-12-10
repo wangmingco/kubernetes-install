@@ -36,6 +36,9 @@ function install_master() {
         kubeadm init --config=kubeadm.config.yaml --ignore-preflight-errors=all
     fi
 
+	echo "测试镜像拉取"
+	kubeadm config images pull --config=kubeadm.default.yaml
+
     echo "😈😈😈😈😈😈😈😈😈😈😈😈😈😈😈😈😈😈😈😈😈"
 }
 
