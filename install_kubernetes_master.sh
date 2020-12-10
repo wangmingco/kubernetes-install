@@ -95,8 +95,8 @@ function call_all() {
 if [ $# -gt 0 ] 
 then
 	for arg in $*; do
-	    $arg | tee  $HOME/{$arg}.log
+	    $arg
 	done
 else     
-	call_all | tee  $HOME/install_kubernetes_master.log
+	call_all
 fi
