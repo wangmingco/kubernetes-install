@@ -13,7 +13,7 @@ function clone_repo() {
 
 function install_master() {
     echo "😈😈😈 kubeadm 开始安装master 😈😈😈"
-    kubeadm reset -f
+    # kubeadm reset -f
     rm -rf /etc/cni/net.d
     rm -rf $HOME/.kube/config
     
