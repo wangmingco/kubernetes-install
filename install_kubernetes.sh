@@ -64,9 +64,6 @@ function install_kubernetes() {
 	
 	echo "安装 kubelet， kubeadm， kubectl"
 	yum install -y kubelet-1.19.4 kubeadm-1.19.4 kubectl-1.19.4 --disableexcludes=kubernetes
-
-	echo "测试镜像拉取"
-	kubeadm config images pull --config=kubeadm.default.yaml
 	
 	echo "启动 kubelet"
 	systemctl enable kubelet
