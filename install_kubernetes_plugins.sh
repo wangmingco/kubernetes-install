@@ -34,7 +34,6 @@ function print_plugin() {
     echo "🤗️🤗️🤗️🤗️🤗️🤗️🤗️🤗️🤗️🤗️🤗️🤗️🤗️🤗️🤗️🤗️🤗️🤗️🤗️🤗️🤗️🤗️🤗️🤗️🤗️🤗️🤗️🤗️"
 
     echo "🤗️🤗️🤗️ Dashboard️️️️请访问 🤗️🤗️🤗️"
-    publicIp=`curl ip.cip.cc`
     echo "IP:  http://${publicIp}:32567"
     echo "token: "
     echo $(kubectl -n kube-system get secret $(kubectl -n kube-system get secret | grep kuboard-user | awk '{print $1}') -o go-template='{{.data.token}}' | base64 -d)

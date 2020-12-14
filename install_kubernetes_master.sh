@@ -23,7 +23,6 @@ function install_master() {
 	
     localIp=`ifconfig eth0|grep -w 'inet'|awk '{ print $2}'`
     sed -i "s@advertiseAddress: 1.2.3.4@advertiseAddress: ${localIp}@g" ./kubeadm.config.yaml
-    publicIp=`curl ip.cip.cc`
     sed -i "s@0.0.0.1@${publicIp}@g" ./kubeadm.config.yaml
 
     echo "安装 kubernetes master"
@@ -81,6 +80,8 @@ function call_all() {
     cd $HOME
     clone_repo
     
+    source ./common.sh
+
     cd $HOME/kubernetes-install
 
 	source ./install_docker.sh
@@ -88,8 +89,7 @@ function call_all() {
 	install_master
     set_config
 
-    source ./install_plugins.sh
-    source ./set_env.sh
+    source ./install_kubernetes_plugins.sh
     
     call_on_finished
 
