@@ -10,7 +10,7 @@ function install_pip() {
 
 	rm -rf /usr/lib/python2.7/site-packages/requests-2.6.0-py2.7.egg-info
 
-	echo "🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️"
+	echo "🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️"
 }
 
 function install_docker_compose() {
@@ -20,7 +20,7 @@ function install_docker_compose() {
 	echo "docker-compose 版本："
 	docker-compose --version
 
-	echo "🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️"
+	echo "🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️"
 }
 
 function install_harbor() {
@@ -29,7 +29,7 @@ function install_harbor() {
 	rm -rf ./harbor
 	tar -zxvf ./${file_exist}
 	cd harbor
-	cp harbor.yml.tmpl harbor.yml 
+	cp harbor.yml.tmpl harbor.yml
 	sed -i "s@reg.mydomain.com@${publicIp}@g" ./harbor.yml
 	sed -i "s@port: 80@port: 10080@g" ./harbor.yml
 	sed -i "s@https:@# https:@g" ./harbor.yml
@@ -39,7 +39,7 @@ function install_harbor() {
 
     sh ./prepare
     sh ./install.sh
-    echo "🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️"
+    echo "🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️"
 }
 
 function add_to_daemon_json() {
@@ -51,7 +51,7 @@ function add_to_daemon_json() {
 	rm -rf ./daemon.json
 	cp daemon.json.bak daemon.json
 
-	echo "🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️"
+	echo "🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️"
 }
 
 function start() {
@@ -71,6 +71,5 @@ if [[ -n "${file_exist}" ]]; then
 	echo "请在浏览器访问: http://${publicIp}:10080/harbor"
 	echo "请在命令后访问: docker login -u admin -p Harbor12345 https://${publicIp}:10080"
 
-	echo "🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃"
+	echo "🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃🙃️🙃️🙃️🙃️"
 fi
-
