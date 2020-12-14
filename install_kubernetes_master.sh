@@ -3,8 +3,6 @@
 function clone_repo() {
     echo "😈😈😈 开始下载仓库 😈😈😈"
 	command -v git >/dev/null 2>&1 || { yum install -y git; }
-	
-    rm -rf $HOME/kubernetes-install 
 
 	git clone https://gitee.com/wangmingco/kubernetes-install.git ~/kubernetes-install/
 
@@ -41,7 +39,7 @@ function install_master() {
     echo "😈😈😈😈😈😈😈😈😈😈😈😈😈😈😈😈😈😈😈😈😈"
 }
 
-function set_config() { 
+function set_kube_config() { 
     echo "😈😈😈 开始配置授权信息目录 😈😈😈"
 
     # kubectl 默认会使用 $HOME/.kube 目录下的授权信息访问 Kubernetes 集群
@@ -79,20 +77,18 @@ function call_on_finished() {
 function call_all() {
     cd $HOME
     clone_repo
-    
-    source ./common.sh
-
+    rm -rf $HOME/kubernetes-install
     cd $HOME/kubernetes-install
 
+    source ./common.sh
 	source ./install_docker.sh
     source ./install_kubernetes.sh
 	install_master
-    set_config
+    set_kube_config
 
     source ./install_kubernetes_plugins.sh
     
     call_on_finished
-
 }
 
 if [ $# -gt 0 ] 
