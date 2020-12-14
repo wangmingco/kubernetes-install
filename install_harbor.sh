@@ -69,7 +69,19 @@ if [[ -n "${file_exist}" ]]; then
 	start
 	echo "安装harbor完成"
 	echo "请在浏览器访问: http://${publicIp}:10080/harbor"
-	echo "请在命令后访问: docker login -u admin -p Harbor12345 https://${publicIp}:10080"
+	echo "请在命令后访问: docker login -u admin -p Harbor12345 http://${publicIp}:10080"
+    
+    echo "执行仓库测试命令"
+    echo "拉取最新centos: docker pull vish/stress"
+    docker pull vish/stress
+    echo "列出本地镜像: docker images"
+    docker images
+    echo "centos镜像打标签: docker tag vish/stress ${publicIp}:10080/library/vish/stress:2020"
+    docker tag vish/stress ${publicIp}:10080/library/vish/stress:2020
+    echo "推送镜像到harbor仓库: docker push ${publicIp}:10080/library/vish/stress:2020"
+    docker push ${publicIp}:10080/library/vish/stress:2020
+    echo "退出登录: docker logout"
+    docker logout
 
 	echo "🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃🙃️🙃️🙃️🙃️"
 fi
