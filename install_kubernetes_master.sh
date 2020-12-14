@@ -76,8 +76,8 @@ function call_on_finished() {
 
 function call_all() {
     cd $HOME
-    clone_repo
     rm -rf $HOME/kubernetes-install
+    clone_repo
     cd $HOME/kubernetes-install
 
     source ./common.sh
