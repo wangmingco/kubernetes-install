@@ -23,24 +23,6 @@ function install_docker_compose() {
 	echo "🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️"
 }
 
-function set_publicip() {
-	echo "🙃️🙃️🙃️ 开始获取公网IP  🙃️🙃️🙃️"
-	publicIp=`curl ip.cip.cc`
-	for variable  in {1..10}
-	do 
-        if [[ ! -n "${publicIp}" ]]; then
-			echo "获取公网IP失败，继续重试: "${publicIp}
-			sleep 1s
-			publicIp=`curl ip.cip.cc`
-			continue
-		fi
-		break
-	done
-	echo "获取公网IP: "${publicIp}
-
-	echo "🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️"
-}
-
 function install_harbor() {
 	echo "🙃️🙃️🙃️ 安装harbor 🙃️🙃️🙃️"
 	cd $HOME/
@@ -73,7 +55,7 @@ function add_to_daemon_json() {
 }
 
 function start() {
-	set_publicip
+	source ./common.sh
 	install_pip
 	install_docker_compose
 	install_harbor
@@ -83,6 +65,7 @@ function start() {
 file_exist=`ls $HOME | grep 'harbor-offline-installer'`
 if [[ -n "${file_exist}" ]]; then
 	echo "🙃️🙃️🙃️ Harbor安装程序开始 🙃️🙃️🙃️"
+	cd $HOME/kubernetes-install
 	start
 	echo "安装harbor完成"
 	echo "请在浏览器访问: http://${publicIp}:10080/harbor"
