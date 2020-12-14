@@ -89,8 +89,10 @@ function call_all() {
     set_config
 
     source ./install_plugins.sh
-
+    source ./set_env.sh
+    
     call_on_finished
+
 }
 
 if [ $# -gt 0 ] 
