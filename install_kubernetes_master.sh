@@ -57,7 +57,8 @@ function call_on_finished() {
     echo "删除master-node上的污点配置"
     sleep 10s
     kubectl taint nodes master node-role.kubernetes.io/master:NoSchedule-
-    
+
+    sh $HOME/kubernetes-install/build/bin/init.sh
     kubectl create namespace demo
     kubectl apply -f ./pods/demo.yaml
 
