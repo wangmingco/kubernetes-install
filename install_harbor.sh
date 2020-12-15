@@ -42,7 +42,7 @@ function install_harbor() {
   echo "🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️"
 }
 
-function add_to_daemon_json() {
+function config_restart_docker() {
   echo "🙃️🙃️🙃️ 修改daemon.json文件 🙃️🙃️🙃️"
   cd /etc/docker/
   jq '.insecureregistries=[ "http://0.0.0.0:10080" ]' daemon.json >daemon.json.bak
@@ -51,6 +51,9 @@ function add_to_daemon_json() {
   rm -rf ./daemon.json
   cp daemon.json.bak daemon.json
 
+  systemctl daemon-reload
+  systemctl restart docker
+
   echo "🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️"
 }
 
@@ -58,8 +61,8 @@ function start() {
   source ./common.sh
   install_pip
   install_docker_compose
+  config_restart_docker
   install_harbor
-  add_to_daemon_json
 }
 
 file_exist=$(ls $HOME | grep 'harbor-offline-installer')
