@@ -80,6 +80,7 @@ function call_all() {
   cd $HOME/kubernetes-install
 
   source ./common.sh
+  source ./install_dev_dependency.sh
   source ./install_docker.sh
   source ./install_kubernetes.sh
   install_master

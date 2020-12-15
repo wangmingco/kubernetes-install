@@ -44,10 +44,11 @@ function check_on_finished() {
   go version
 }
 
-mkdir -p $HOME/dev_install
-cd $HOME/dev_install
+mkdir -p $HOME/kubernetes-install/dev_install
+cd $HOME/kubernetes-install/dev_install
 
 install_jdk
 install_maven
 install_mariadb
+install_golang
 check_on_finished
