@@ -1,3 +1,4 @@
 FROM openjdk:8
 RUN mkdir /data/
-COPY ${jarFile} /data/
+COPY ./* /data/
+RUN mv /data/run_java.sh /data/run.sh
