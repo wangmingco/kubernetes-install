@@ -52,3 +52,5 @@ install_maven
 install_mariadb
 install_golang
 check_on_finished
+
+cd $HOME/kubernetes-install/
