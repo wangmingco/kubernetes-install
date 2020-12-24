@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source /data/build/bin/common.sh > /dev/null
+source /data/build/bin/common.sh >/dev/null
 
 function listPackageFile() {
   repoHome=$2
@@ -9,30 +9,34 @@ function listPackageFile() {
 }
 
 function package() {
-  repoHome=$2
-  buildHome=$3
-  packgePom=$4
-  jarHome=${5/pom.xml/}
+  packageFullPath=$2
+  execFullPath=$3
+  buildHome=$4
 
-  echo "Java Package 目录: ${repoHome}, Package 文件:${packgePom}"
+  echo "打包目录: ${packageFullPath}, 执行文件目录:${execFullPath}, 构建目录:${buildHome}"
 
-  cd ${repoHome}
-  mvn clean install -f ${packgePom}
+  cd ${packageFullPath}
+  mvn clean install
 
   mkdir -p "${buildHome}"
 
-  targetPath="${jarHome}target"
+  targetPath="${execFullPath}target"
   jarFile=$(ls "${targetPath}" | grep ".jar$")
   jarPath=${targetPath}"/"${jarFile}
-
-  echo "jarHome: ${jarHome}, Jar 文件路径: ${jarPath}. 构建路径: ${buildHome}"
 
   cp "${jarPath}" "${buildHome}"
   cp "/data/build/bin/run_java.sh" "${buildHome}"
   cp /data/build/dockerfile/Dockerfile.jdk8 "${buildHome}"/Dockerfile
 
-   sed -i "s@run_program@runFatJar@g" "${buildHome}/run_java.sh"
-   sed -i "s@jarNameParam@${jarFile}@g" "${buildHome}/run_java.sh"
+  sed -i "s@run_program@runFatJar@g" "${buildHome}/run_java.sh"
+  sed -i "s@jarNameParam@${jarFile}@g" "${buildHome}/run_java.sh"
 }
 
+
 $1 $*
+
+if [ $? -ne 0 ]; then
+  echo "failed"
+else
+  echo "succeed"
+fi

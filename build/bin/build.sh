@@ -17,27 +17,33 @@ function cloneOrPull() {
 }
 
 function buildImage() {
-  tagName=$2
-  buildDate=$3
-  buildHome=$4
+  image=$2
+  buildHome=$3
+  mirror=$4
 
-  cd "${buildHome}/${buildDate}"
+  cd "${buildHome}"
+  echo "${buildHome} 开始构建: docker build -f ./Dockerfile -t "${image}" --build-arg mirror=${mirror} . 2>&1"
+  docker build -f ./Dockerfile -t "${image}" --build-arg mirror=${mirror} . 2>&1
 
-  dockerfile="${buildHome}/${buildDate}/Dockerfile"
-  echo "${buildHome} 开始构建: docker build -f "${dockerfile}" -t "${publicIp}:10080/library/${tagName}":"${buildDate}" . 2>&1"
-  docker build -f "${dockerfile}" -t "${publicIp}:10080/library/${tagName}":"${buildDate}" . 2>&1
-
-  echo "${tagName} 所有镜像"
-  docker images | grep "${tagName}"
+  echo "${image} 所有镜像"
+  docker images "${image}"
 }
 
 function pushImage() {
-  tagName=$2
-  buildDate=$3
+  image=$2
+
+  echo "开始推送镜像: ${image}"
 
   docker login -u admin -p Harbor12345 http://"${publicIp}":10080
-  docker push "${publicIp}":10080/library/"${tagName}:${buildDate}"
+  docker push "${image}"
   docker logout
 }
 
+
 $1 $*
+
+if [ $? -ne 0 ]; then
+    echo "failed"
+else
+    echo "succeed"
+fi

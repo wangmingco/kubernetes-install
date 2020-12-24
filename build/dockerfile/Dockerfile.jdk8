@@ -1,4 +1,5 @@
-FROM openjdk:8
+ARG mirror=none
+FROM ${mirror}
 RUN mkdir /data/
 COPY ./* /data/
 RUN mv /data/run_java.sh /data/run.sh

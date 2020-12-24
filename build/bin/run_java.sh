@@ -30,4 +30,5 @@ runZip() {
   echo "run_zip not implement"
 }
 
+cd /data/
 run_program
