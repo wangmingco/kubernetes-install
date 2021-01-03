@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 
 function clone_repo() {
   echo "😈😈😈 开始下载仓库 😈😈😈"
@@ -42,6 +42,7 @@ function set_kube_config() {
   echo "😈😈😈 开始配置授权信息目录 😈😈😈"
 
   # kubectl 默认会使用 $HOME/.kube 目录下的授权信息访问 Kubernetes 集群
+  rm -rf $HOME/.kube
   mkdir -p $HOME/.kube
   sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
   sudo chown $(id -u):$(id -g) $HOME/.kube/config

@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 
 function config_firewall() {
   echo "😺😺😺 开始设置防火墙 😺😺😺"
@@ -10,10 +10,11 @@ function config_firewall() {
 
   setenforce 0
 
+  cp /etc/selinux/config /etc/selinux/config.bak
   sed -i 's/^SELINUX=enforcing$/SELINUX=disabled/' /etc/selinux/config
 
   # 设置iptables
-  cp ./k8s.conf /etc/sysctl.d/k8s.conf
+  cp -rf ./k8s.conf /etc/sysctl.d/k8s.conf
   sysctl --system
 
   # 允许网卡间数据转发
@@ -63,7 +64,9 @@ function install_kubernetes() {
   create_kubernetes_repo
 
   echo "安装 kubelet， kubeadm， kubectl"
+  yum remove -y kubelet-1.19.4 kubeadm-1.19.4 kubectl-1.19.4
   yum install -y kubelet-1.19.4 kubeadm-1.19.4 kubectl-1.19.4 --disableexcludes=kubernetes
+  rm -rf /etc/kubernetes/
 
   echo "启动 kubelet"
   systemctl enable kubelet

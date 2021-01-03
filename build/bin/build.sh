@@ -24,9 +24,6 @@ function buildImage() {
   cd "${buildHome}"
   echo "${buildHome} 开始构建: docker build -f ./Dockerfile -t "${image}" --build-arg mirror=${mirror} . 2>&1"
   docker build -f ./Dockerfile -t "${image}" --build-arg mirror=${mirror} . 2>&1
-
-  echo "${image} 所有镜像"
-  docker images "${image}"
 }
 
 function pushImage() {

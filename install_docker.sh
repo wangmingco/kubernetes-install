@@ -15,6 +15,7 @@ function create_docker_daemon() {
 
   cd $HOME/kubernetes-install
 
+  rm -rf /etc/docker/
   mkdir -p /etc/docker
 
   /bin/cp -rf ./daemon.json /etc/docker/daemon.json
@@ -28,6 +29,7 @@ function install_docker() {
 
   echo "😊😊😊开始安装docker😊😊😊"
 
+  yum remove -y docker-ce-19.03.14
   yum install -y yum-utils device-mapper-persistent-data lvm2
   yum install -y docker-ce-19.03.14
   systemctl daemon-reload

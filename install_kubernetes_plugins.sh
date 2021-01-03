@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 
 function install_net_plugin() {
   echo "🤗️🤗️🤗️ 安装 weave 网络插件 🤗️🤗️🤗️"
