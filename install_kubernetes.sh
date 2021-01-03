@@ -64,9 +64,7 @@ function install_kubernetes() {
   create_kubernetes_repo
 
   echo "安装 kubelet， kubeadm， kubectl"
-  yum remove -y kubelet-1.19.4 kubeadm-1.19.4 kubectl-1.19.4
   yum install -y kubelet-1.19.4 kubeadm-1.19.4 kubectl-1.19.4 --disableexcludes=kubernetes
-  rm -rf /etc/kubernetes/
 
   echo "启动 kubelet"
   systemctl enable kubelet

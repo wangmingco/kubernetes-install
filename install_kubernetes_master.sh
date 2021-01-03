@@ -12,8 +12,6 @@ function clone_repo() {
 function install_master() {
   echo "😈😈😈 kubeadm 开始安装master 😈😈😈"
   # kubeadm reset -f
-  rm -rf /etc/cni/net.d
-  rm -rf $HOME/.kube/config
 
   # echo "生成 kubeadm.default.yaml 文件"
   # kubeadm config print init-defaults > ./kubeadm.default.yaml
@@ -41,7 +39,6 @@ function set_kube_config() {
   echo "😈😈😈 开始配置授权信息目录 😈😈😈"
 
   # kubectl 默认会使用 $HOME/.kube 目录下的授权信息访问 Kubernetes 集群
-  rm -rf $HOME/.kube
   mkdir -p $HOME/.kube
   sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
   sudo chown $(id -u):$(id -g) $HOME/.kube/config
@@ -79,6 +76,7 @@ function call_all() {
   clone_repo
   cd $HOME/kubernetes-install
 
+  source ./uninstall.sh
   source ./common.sh
   source ./install_dev_dependency.sh
   source ./install_docker.sh
