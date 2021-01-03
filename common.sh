@@ -29,5 +29,13 @@ function set_publicip() {
   echo "😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘"
 }
 
+function set_local_ip() {
+  machine_physics_net=$(ls /sys/class/net/ | grep -v "`ls /sys/devices/virtual/net/`");
+  localIp=$(ip addr | grep "$machine_physics_net" | awk '/^[0-9]+: / {}; /inet.*global/ {print gensub(/(.*)\/(.*)/, "\\1", "g", $2)}');
+  echo  "内网IP: ${localIp}"
+
+}
+
 set_client_alive
+set_local_ip
 set_publicip

@@ -19,7 +19,6 @@ function install_master() {
   # kubeadm config print init-defaults > ./kubeadm.default.yaml
   # sed -i "s@imageRepository: k8s.gcr.io@imageRepository: registry.aliyuncs.com/google_containers@g" ./kubeadm.default.yaml
 
-  localIp=$(ifconfig eth0 | grep -w 'inet' | awk '{ print $2}')
   sed -i "s@advertiseAddress: 1.2.3.4@advertiseAddress: ${localIp}@g" ./kubeadm.config.yaml
   sed -i "s@0.0.0.1@${publicIp}@g" ./kubeadm.config.yaml
 
