@@ -12,6 +12,7 @@ function install_maven() {
   echo "export M2_HOME=/opt/apache-maven" >>/etc/profile.d/maven.sh
   echo "export PATH=\$PATH:\$M2_HOME/bin" >>/etc/profile.d/maven.sh
 
+  \cp -rf ~/kubernetes-install/build/maven/settings.xml /opt/apache-maven/conf/settings.xml
   source /etc/profile.d/maven.sh
 }
 
