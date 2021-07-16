@@ -18,9 +18,20 @@ function install_maven() {
 
 function install_mariadb() {
 
-  yum install -y mariadb mariadb-server
+  touch /etc/yum.repos.d/MariaDB.repo
+
+  echo "[mariadb]" > /etc/yum.repos.d/MariaDB.repo
+  echo "name = MariaDB" >> /etc/yum.repos.d/MariaDB.repo
+  echo "baseurl = http://mirrors.ustc.edu.cn/mariadb/yum/10.3/centos7-amd64" >> /etc/yum.repos.d/MariaDB.repo
+  echo "gpgkey=https://mirrors.ustc.edu.cn/mariadb/yum/RPM-GPG-KEY-MariaDB" >> /etc/yum.repos.d/MariaDB.repo
+  echo "gpgcheck=0" >> /etc/yum.repos.d/MariaDB.repo
+
+  yum install -y yum-utils device-mapper-persistent-data lvm2
+  yum -y install  MariaDB-server MariaDB-client
+  
   systemctl start mariadb
   systemctl enable mariadb
+  
   echo "请使用 mysql_secure_installation 命令设置密码"
 }
 
