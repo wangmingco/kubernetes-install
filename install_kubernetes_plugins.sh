@@ -41,5 +41,5 @@ function print_plugin() {
 }
 
 install_net_plugin
-install_storge_plugin
+# install_storge_plugin
 install_dashboard_plugin
