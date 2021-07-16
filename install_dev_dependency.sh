@@ -11,9 +11,11 @@ function install_maven() {
   echo "" >/etc/profile.d/maven.sh
   echo "export M2_HOME=/opt/apache-maven" >> /etc/profile.d/maven.sh
   echo "export PATH=\$PATH:\$M2_HOME/bin" >> /etc/profile.d/maven.sh
+  
+  ln /opt/apache-maven/bin/mvn /usr/bin/mvn
 
+  echo "" >> ~/.bashrc
   echo "source /etc/profile.d/maven.sh" >> ~/.bashrc
-  source ~/.bashrc
   
   # 系统对cp命令进行了重命名，直接使用 /usr/bin/cp 强制覆盖
   /usr/bin/cp -rf ~/kubernetes-install/build/maven/settings.xml /opt/apache-maven/conf/settings.xml
