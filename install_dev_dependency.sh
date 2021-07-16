@@ -12,8 +12,10 @@ function install_maven() {
   echo "export M2_HOME=/opt/apache-maven" >>/etc/profile.d/maven.sh
   echo "export PATH=\$PATH:\$M2_HOME/bin" >>/etc/profile.d/maven.sh
 
-  \cp -rf ~/kubernetes-install/build/maven/settings.xml /opt/apache-maven/conf/settings.xml
   source /etc/profile.d/maven.sh
+  
+  # 系统对cp命令进行了重命名，直接使用 /usr/bin/cp 强制覆盖
+  /usr/bin/cp -rf ~/kubernetes-install/build/maven/settings.xml /opt/apache-maven/conf/settings.xml
 }
 
 function install_mariadb() {
