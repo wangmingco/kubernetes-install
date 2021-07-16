@@ -40,6 +40,7 @@ function install_harbor() {
 
   sh ./prepare
   sh ./install.sh
+  docker-compose ps
   echo "🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️🙃️"
 }
 
