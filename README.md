@@ -49,5 +49,5 @@ sh ~/kubernetes-install/install_kube_cloud_server.sh
 ```
 7. 访问 kube_cloud 部署Java应用
 ```
-http://公网IP:10080/harbor/
+http://公网IP:8080
 ```
