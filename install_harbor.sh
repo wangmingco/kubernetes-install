@@ -5,8 +5,9 @@ function install_pip() {
   yum -y install jq
 
   yum -y install epel-release
+  yum -y remove python-pip
   yum -y install python-pip
-  pip install --upgrade pip
+  pip install --upgrade pip==20.3.4
 
   rm -rf /usr/lib/python2.7/site-packages/requests-2.6.0-py2.7.egg-info
 
