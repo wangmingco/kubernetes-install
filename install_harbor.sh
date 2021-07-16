@@ -75,7 +75,10 @@ if [[ -n "${file_exist}" ]]; then
   echo "请在浏览器访问: http://${publicIp}:10080/harbor"
   echo "请在命令后访问: docker login -u admin -p Harbor12345 http://${publicIp}:10080"
   
-  docker login -u admin -p Harbor12345 http://${publicIp}:10080
+  for i in {1..10}; do
+    docker login -u admin -p Harbor12345 http://${publicIp}:10080 && break
+    sleep 1
+  done
   
   echo "执行仓库测试命令"
   echo "拉取最新centos: docker pull vish/stress"
